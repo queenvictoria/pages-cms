@@ -1,8 +1,9 @@
 import { z } from "zod";
 import { Field } from "@/types/field";
 import { EditComponent } from "./edit-component";
+import { getRelationsAsOptions } from "@/lib/relation";
 
-const schema = (field: Field) => {
+const schema = async (field: Field) => {
   let zodSchema;
 
   if (field.options?.values && Array.isArray(field.options.values)) {
