@@ -1,17 +1,13 @@
 import { Config } from "@/types/config";
+import { Option } from "@/types/field";
 
-// @TODO Move to types
-type OptionProps = string | {
-  value: string,
-  label: string
-};
-
-const getRelationsAsOptions = async (relationPath: string, config: Config|null): Promise<OptionProps[]> => {
+const getRelationsAsOptions = async (relationPath: string, config: Config|null): Promise<Option[]> => {
   if (!config) return []
 
   const [name, fieldName, fieldLabel] = relationPath.split('|')
-  // @FIX get path from schema
-  const path = `src/data/${name}`
+  const schema = config.object.content.find((c: any) => c.name === name)
+  if (!schema) return []
+  const path = schema.path
 
   const response = await fetch(
     `/api/${config.owner}/${config.repo}/${config.branch}/collections/${encodeURIComponent(name)}?path=${encodeURIComponent(path || schema.path)}`);

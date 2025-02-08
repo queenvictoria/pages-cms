@@ -11,3 +11,8 @@ export type Field = {
   options?: Record<string, unknown> | null;
   fields?: Field[];
 };
+
+export type Option = string | {
+  value: string,
+  label: string
+};
