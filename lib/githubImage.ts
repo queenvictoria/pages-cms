@@ -20,6 +20,7 @@ const getRelativeUrl = (
 ) => {
   let relativePath = path;
 
+  if (!path || typeof path !== 'string') return null;
   if (path.startsWith("https://raw.githubusercontent.com/")) {
     const pattern = new RegExp(`^https://raw\\.githubusercontent\\.com/${owner}/${repo}/${encodeURIComponent(branch)}/`, "i");
     relativePath = path.replace(pattern, "");
@@ -146,7 +147,9 @@ const swapPrefix = (
   relative = false
 ) => {
   if (
-    path == null
+    !path
+    || typeof path !== "string"
+    || path == null
     || from == null
     || to == null
     || (from === to)
