@@ -154,10 +154,10 @@ const EditComponent = forwardRef((props: any, ref: any) => {
       if (!field.options?.fetch) {
         setSelectedOptions(newValue);
       } else {
-        const selectedValue = newValue 
-          ? field.options?.multiple 
-            ? newValue.map((item: any) => ({ value: item.value, label: item.value }))
-            : { value: newValue.value, label: newValue.value }
+        const selectedValue = newValue
+          ? field.options?.multiple
+            ? newValue.map((item: any) => ({ value: item.value, label: item.label }))
+            : { value: newValue.value, label: newValue.label }
           : field.options?.multiple ? [] : null;
         setSelectedOptions(selectedValue);
       }
